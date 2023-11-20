@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: gerda_database
+      POSTGRES_USER: gerda_username
+      POSTGRES_PASSWORD: asdfg123
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin-container
+    environment:
+      PGADMIN_EMAIL: gerda@admin.com
+      PGADMIN_PASSWORD: asdfg123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
